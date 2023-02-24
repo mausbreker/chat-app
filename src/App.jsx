@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import './App.css';
+import Header from './components/Header';
 import Input from './components/Input';
 import Landing from './components/Landing';
 import Messages from './components/Messages';
-import Room from './components/Room';
 
 function App() {
   const [drone, setDrone] = useState();
   const [messages, setMessages] = useState([]);
   const [member, setMember] = useState({
-    username: randomName(),
+    username: "",
     color: randomColor()
   });
+  const [isLanding, setIsLanding] = useState(true);
+
+  const setMemberName = (name) => {
+    setMember(prevObject => ({...prevObject, username: name}))
+  }
   
   function randomName() {
       const adjectives = ["autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark", "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter", "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue", "billowing", "broken", "cold", "damp", "falling", "frosty", "green", "long", "late", "lingering", "bold", "little", "morning", "muddy", "old", "red", "rough", "still", "small", "sparkling", "throbbing", "shy", "wandering", "withered", "wild", "black", "young", "holy", "solitary", "fragrant", "aged", "snowy", "proud", "floral", "restless", "divine", "polished", "ancient", "purple", "lively", "nameless"];
@@ -34,16 +38,13 @@ function App() {
     })
   };
 
-  useEffect(() => {
-    // console.log(messages);
-  }, [messages]);
 
-  useEffect(() => {
+  const setUpDrone = () => {
     const drone = new window.Scaledrone("qrpuCOmHNo9hL2Ou", {
       data: member,
     });
     setDrone(drone);
-  }, [])
+  }
 
   useEffect(() => {
     if (drone) {
@@ -66,13 +67,23 @@ function App() {
 
   return (
     <>
-      <Messages 
-        messages={messages}
-        currentMember={member}
-      />
-      <Input 
-        onSendMessage={onSendMessage}
-      />
+      {isLanding ? 
+        <Landing 
+          setIsLanding={setIsLanding}
+          setMemberName={setMemberName}
+          setUpDrone={setUpDrone}
+        /> :
+        <>
+          <Header />
+          <Messages 
+            messages={messages}
+            currentMember={member}
+          />
+          <Input 
+            onSendMessage={onSendMessage}
+          />
+        </>
+      }
     </>
   );
 }

@@ -1,0 +1,29 @@
+.message-form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+  
+  .message-input {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #FC7300;
+    flex-grow: 1;
+  }
+  
+  .message-submit {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #FC7300;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
+  }

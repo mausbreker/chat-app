@@ -1,3 +1,5 @@
+import '../styles/messages.scss';
+
 const Messages = (props) => {
     const {messages} = props;
     
@@ -7,16 +9,18 @@ const Messages = (props) => {
         const messageFromMe = member.id === currentMember.id;
         const className = messageFromMe ?
           "Messages-message currentMember" : "Messages-message";
+        const today = new Date();
         return (
           <li className={className} key={Math.random()}>
             <span
               className="avatar"
-              style={{backgroundColor: member.color}}
+              style={{backgroundColor: member.clientData.color}}
             />
             <div className="Message-content">
               <div className="username">
-                {member.username}
+                {member.clientData.username}
               </div>
+              <div className='username'>{today.getHours() + ':' + today.getMinutes()}</div>
               <div className="text">{text}</div>
             </div>
           </li>

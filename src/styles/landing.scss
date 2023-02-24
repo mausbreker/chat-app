@@ -1,25 +1,63 @@
-.landing-form {
-    width: 600px;
-    max-width: 100%;
+.landing {
     margin: 0 auto;
+    text-align: center;
 
-    .input-form {
-        border-radius: 8px;
-        border: 1px solid #E8E8E8;
-        font-size: 16px;
-        padding: 5px;
-        margin-top: 30px;
+    .landing-msg {
+        font-size: 20px;
+        margin: 20px;
     }
 
-    .avatar-wrap {
-        display: flex;
-        justify-content: space-evenly;
-        margin: 30px 0;
+    .landing-form {
+        width: 600px;
+        max-width: 100%;
+        margin: 0 auto;
+    
+        .input-form {
+            border-radius: 8px;
+            border: 1px solid #E8E8E8;
+            font-size: 16px;
+            padding: 5px;
+        }
+    
+        .avatar-wrap {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 30px 0;
+    
+            .avatar {
+                width: 100px;
+                height: 100px;
 
-        .avatar {
-            width: 100px;
-            height: 100px;
-            background-color: bisque;
+                &:nth-child(1) {
+                    background-color: bisque;
+                }
+
+                &:nth-child(2) {
+                    background-color: aquamarine;
+                }
+
+                &:nth-child(3) {
+                    background-color: darkgreen;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .form-button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background-color: #FC7300;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-left: 10px;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }
