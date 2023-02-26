@@ -20,7 +20,9 @@ const Messages = (props) => {
               <div className="username">
                 {member.clientData.username}
               </div>
-              <div className='username'>{today.getHours() + ':' + today.getMinutes()}</div>
+              <div className='username'>
+                {props.timestamp}
+              </div>
               <div className="text">{text}</div>
             </div>
           </li>

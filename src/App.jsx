@@ -9,7 +9,7 @@ function App() {
   const [drone, setDrone] = useState();
   const [messages, setMessages] = useState([]);
   const [member, setMember] = useState({
-    username: "",
+    username: randomName(),
     color: randomColor()
   });
   const [isLanding, setIsLanding] = useState(true);
@@ -38,6 +38,12 @@ function App() {
     })
   };
 
+  const formatDate = (date) => {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${hours}:${minutes}`;
+  }
+  const timestamp = formatDate(new Date());
 
   const setUpDrone = () => {
     const drone = new window.Scaledrone("qrpuCOmHNo9hL2Ou", {
@@ -49,17 +55,19 @@ function App() {
   useEffect(() => {
     if (drone) {
       const room = drone.subscribe("observable-room");
-
+      
+      
       drone.on('open', error => {
         if (error) {
           return console.log(error);
         }
 
         setMember({...member, id: drone.clientId});
+        
 
         room.on('data', (data, member) => {
           console.log(data, member);
-          setMessages((prevArray) => [...prevArray, {member, text: data}])
+          setMessages((prevArray) => [...prevArray, {member, text: data, timestamp}])
         });
       });
     }
@@ -78,6 +86,7 @@ function App() {
           <Messages 
             messages={messages}
             currentMember={member}
+            timestamp={timestamp}
           />
           <Input 
             onSendMessage={onSendMessage}

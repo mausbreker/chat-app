@@ -2,7 +2,12 @@ import { useState } from 'react';
 import '../styles/landing.scss';
 import Header from './Header';
 
-const Landing = (props) => {
+const Landing = ({setMemberName, setUpDrone, setIsLanding, setMemberAvatar}) => {
+    const handleSubmit = (e) => {
+        setUpDrone();
+        setIsLanding(false);
+    }
+
     return (
         <>
             <Header />
@@ -10,17 +15,9 @@ const Landing = (props) => {
                 <div className="landing-msg">
                     Enter your name and choose an avatar
                 </div>
-                <form className='landing-form'>
-                    <input className='input-form' type="text" placeholder='Your name' onChange={(e) => props.setMemberName(e.target.value)}/>
-                    <div className="avatar-wrap">
-                        <div className="avatar"></div>
-                        <div className="avatar"></div>
-                        <div className="avatar"></div>
-                    </div>
-                    <button className='form-button' type='submit' onClick={() => {
-                        props.setUpDrone()
-                        props.setIsLanding(false)
-                    } }>Submit</button>
+                <form className='landing-form' onSubmit={handleSubmit}>
+                    <input className='input-form' type="text" placeholder='Your name' onChange={(e) => setMemberName(e.target.value)}/>
+                    <button className='form-button' type='submit'>Submit</button>
                 </form>
             </div>
         </>
