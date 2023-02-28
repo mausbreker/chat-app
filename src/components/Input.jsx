@@ -7,9 +7,14 @@ const Input = (props) => {
     const onChange = (e) => setInput(e.target.value)
 
     const onSubmit = (e) => {
-        e.preventDefault();
-        setInput("");
-        props.onSendMessage(input);
+        if (input.length <= 1) {
+            e.preventDefault();
+            alert('Cannot send an empty message');
+        } else {
+            e.preventDefault();
+            setInput("");
+            props.onSendMessage(input);
+        }
     }
 
     return (

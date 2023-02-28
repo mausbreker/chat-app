@@ -13,9 +13,10 @@ function App() {
     color: randomColor()
   });
   const [isLanding, setIsLanding] = useState(true);
+  const [isInputDisabled, setIsInputDisabled] = useState(true);
 
   const setMemberName = (name) => {
-    setMember(prevObject => ({...prevObject, username: name}))
+    setMember(prevObject => ({...prevObject, username: name}));
   }
   
   function randomName() {
@@ -43,7 +44,7 @@ function App() {
     const minutes = date.getMinutes();
     return `${hours}:${minutes}`;
   }
-  const timestamp = formatDate(new Date());
+  // const timestamp = formatDate(new Date());
 
   const setUpDrone = () => {
     const drone = new window.Scaledrone("qrpuCOmHNo9hL2Ou", {
@@ -62,12 +63,14 @@ function App() {
           return console.log(error);
         }
 
+        setIsInputDisabled(false);
+
         setMember({...member, id: drone.clientId});
         
 
         room.on('data', (data, member) => {
           console.log(data, member);
-          setMessages((prevArray) => [...prevArray, {member, text: data, timestamp}])
+          setMessages((prevArray) => [...prevArray, {member, text: data, timestamp: formatDate(new Date())}])
         });
       });
     }
@@ -75,23 +78,25 @@ function App() {
 
   return (
     <>
-      {isLanding ? 
-        <Landing 
-          setIsLanding={setIsLanding}
-          setMemberName={setMemberName}
-          setUpDrone={setUpDrone}
-        /> :
-        <>
-          <Header />
-          <Messages 
-            messages={messages}
-            currentMember={member}
-            timestamp={timestamp}
-          />
-          <Input 
-            onSendMessage={onSendMessage}
-          />
-        </>
+      {
+        isLanding ? 
+          <Landing 
+            setIsLanding={setIsLanding}
+            setMemberName={setMemberName}
+            setUpDrone={setUpDrone}
+          /> :
+          <>
+            <Header />
+            <Messages 
+              messages={messages}
+              currentMember={member}
+            />
+            {!isInputDisabled &&
+              <Input 
+                onSendMessage={onSendMessage}
+              />
+            }
+          </>
       }
     </>
   );

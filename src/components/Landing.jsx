@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import '../styles/landing.scss';
 import Header from './Header';
 
 const Landing = ({setMemberName, setUpDrone, setIsLanding, setMemberAvatar}) => {
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         setUpDrone();
         setIsLanding(false);
     }
