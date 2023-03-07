@@ -1,7 +1,7 @@
 import '../styles/landing.scss';
 import Header from './Header';
 
-const Landing = ({setMemberName, setUpDrone, setIsLanding, setMemberAvatar}) => {
+const Landing = ({setMemberName, setUpDrone, setIsLanding}) => {
     const handleSubmit = () => {
         setUpDrone();
         setIsLanding(false);

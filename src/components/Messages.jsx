@@ -2,7 +2,6 @@ import '../styles/messages.scss';
 
 const Messages = (props) => {
     const {messages} = props;
-    console.log(messages);
     
     const renderMessage = (message) => {
         const {member, text, timestamp} = message;
